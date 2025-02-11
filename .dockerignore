@@ -1,0 +1,16 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore log files
+*.log
+
+# Ignore dataset folders
+Fast_Furious_Insured/test_images/
+Fast_Furious_Insured/train_images/
+
+# Ignore hidden files
+.DS_Store
+.env
