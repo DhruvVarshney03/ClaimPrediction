@@ -1,21 +1,25 @@
-# Use an official Python image
+# Use an official Python runtime as a parent image
 FROM python:3.11
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
-RUN python -m pip install --upgrade pip
+# Copy the necessary files into the container
 COPY requirements.txt .
+COPY main.py .
+COPY preprocessing.py .
+COPY image_processing.py .
+COPY model_loader.py .
+COPY models/ models/
+COPY processed_data/ processed_data/
+COPY scalers/ scalers/
+
+RUN apt-get update && apt-get install -y libgl1-mesa-glx
+
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install necessary system libraries
-RUN apt-get update && apt-get install -y libgl1 libglib2.0-0
-
-# Copy all necessary API files (inside api/)
-COPY . .  
-
-# Expose the FastAPI port
+# Expose the port on which FastAPI will run
 EXPOSE 8000
 
 # Run the FastAPI application

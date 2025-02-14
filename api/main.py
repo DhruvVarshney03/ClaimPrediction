@@ -76,7 +76,7 @@ async def process_image(file: UploadFile = File(...)):
     Takes an image, extracts features, and stores them.
     """
     try:
-        image_path = "temp_image.jpg"
+        image_path = "api\processed_data\temp_image.jpg"
         with open(image_path, "wb") as buffer:
             buffer.write(await file.read())
 

@@ -1,0 +1,8 @@
+services:
+  api:
+    build: ./api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api/processed_data:/app/processed_data  # Persist .pkl files
+    restart: always  # Ensures the container restarts if it fails
