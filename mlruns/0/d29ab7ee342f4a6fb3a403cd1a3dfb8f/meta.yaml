@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/mlruns/0/d29ab7ee342f4a6fb3a403cd1a3dfb8f/artifacts
+end_time: 1739358195253
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d29ab7ee342f4a6fb3a403cd1a3dfb8f
+run_name: resilient-hound-198
+run_uuid: d29ab7ee342f4a6fb3a403cd1a3dfb8f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739358045798
+status: 3
+tags: []
+user_id: varsh

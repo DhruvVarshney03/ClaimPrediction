@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/mlruns/0/e06b2dc0af9043eb890e7c5388e18c83/artifacts
+end_time: 1739362531283
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e06b2dc0af9043eb890e7c5388e18c83
+run_name: dapper-toad-651
+run_uuid: e06b2dc0af9043eb890e7c5388e18c83
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739362441850
+status: 3
+tags: []
+user_id: varsh

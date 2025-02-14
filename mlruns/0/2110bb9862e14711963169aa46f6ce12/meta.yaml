@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/mlruns/0/2110bb9862e14711963169aa46f6ce12/artifacts
+end_time: 1739360934705
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2110bb9862e14711963169aa46f6ce12
+run_name: monumental-stoat-230
+run_uuid: 2110bb9862e14711963169aa46f6ce12
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739360889482
+status: 3
+tags: []
+user_id: varsh

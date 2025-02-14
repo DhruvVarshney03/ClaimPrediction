@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/mlruns/0/27b664a1bac14563bd0f625fead7e779/artifacts
+end_time: 1739361187720
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 27b664a1bac14563bd0f625fead7e779
+run_name: sassy-mule-371
+run_uuid: 27b664a1bac14563bd0f625fead7e779
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739361136123
+status: 3
+tags: []
+user_id: varsh

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/mlruns/0/9a068c0f1d374b6790bf60a017dcac64/artifacts
+end_time: 1739360073622
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9a068c0f1d374b6790bf60a017dcac64
+run_name: orderly-rat-694
+run_uuid: 9a068c0f1d374b6790bf60a017dcac64
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739359947112
+status: 4
+tags: []
+user_id: varsh
