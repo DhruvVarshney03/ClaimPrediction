@@ -11,7 +11,7 @@ PROCESSED_DATA_DIR = "processed_data"
 IMAGE_FEATURES_FILE_PATH = os.path.join(PROCESSED_DATA_DIR, "stored_data", "processed_images.pkl")
 
 # Ensure storage directory exists
-os.makedirs(os.path.dirname(IMAGE_FEATURES_FILE_PATH), exist_ok=True)  # Fixed directory creation
+os.makedirs(os.path.dirname(IMAGE_FEATURES_FILE_PATH), exist_ok=True)
 
 # Load pre-trained ResNet50 model (without top layers)
 base_model = ResNet50(weights="imagenet", include_top=False, pooling="avg")
@@ -41,32 +41,13 @@ def preprocess_image(image_path):
 
 def extract_image_features(image_path):
     """
-    Extracts 2048-dimensional feature vector from the image using ResNet50.
-    - Loads and preprocesses the image.
-    - Extracts deep features using ResNet50.
-    - Flattens the output and stores it.
+    Extracts 2048-dimensional feature vector from the image using ResNet50 and appends to stored data.
     """
+
     img_processed = preprocess_image(image_path)
     features = base_model.predict(img_processed)
     features_flattened = features.flatten()
-    
-    # Load existing image features if the file exists
-    if os.path.exists(IMAGE_FEATURES_FILE_PATH):
-        with open(IMAGE_FEATURES_FILE_PATH, "rb") as f:
-            existing_features = pickle.load(f)
-
-        # Ensure `existing_features` is a list
-        if isinstance(existing_features, np.ndarray):
-            existing_features = list(existing_features)  # Fix applied
-        elif not isinstance(existing_features, list):
-            raise ValueError("Stored data format is not supported!")
-
-        existing_features.append(features_flattened.tolist())
-    else:
-        existing_features = [features_flattened.tolist()]
-
-    # Store processed image features
-    with open(IMAGE_FEATURES_FILE_PATH, "wb") as f:
-        pickle.dump(existing_features, f)
 
     return features_flattened
+
+    

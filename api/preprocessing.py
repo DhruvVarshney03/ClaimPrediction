@@ -71,25 +71,6 @@ def preprocess_data(raw_data):
     # **Combine categorical & numerical processed features**
     processed_features = np.hstack([scaled_numerical, encoded_categorical])
 
-    # **Store processed structured data efficiently**
-    try:
-        if os.path.exists(STRUCTURED_DATA_PATH):
-            with open(STRUCTURED_DATA_PATH, "rb") as f:
-                existing_data = pickle.load(f)
+    print("Processed features generated successfully.")  # Debugging
+    return processed_features  # Only return, do not save here
 
-            if not isinstance(existing_data, list):  # Ensure it's a list
-                existing_data = existing_data.tolist()
-
-            existing_data.append(processed_features.tolist())  # Append new data
-        else:
-            existing_data = [processed_features.tolist()]  # Create new list
-
-        with open(STRUCTURED_DATA_PATH, "wb") as f:
-            pickle.dump(existing_data, f)
-
-        print("Processed features saved successfully.")  # Debugging
-        return processed_features
-    
-    except Exception as e:
-        print(f"Error while saving processed data: {e}")
-        return None

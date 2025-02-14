@@ -39,17 +39,36 @@ async def process_structured(data: dict = Body(...)):
     try:
         logger.info(f"Received Structured Data: {data}")
         processed_features = preprocess_data(data)
+        logger.info(f"Processed features type: {type(processed_features)}, value: {processed_features}, shape: {processed_features.shape}")
 
         with file_lock:
-            # Save processed structured data
+            # Load existing structured data if available
+            if os.path.exists(STRUCTURED_DATA_PATH):
+                with open(STRUCTURED_DATA_PATH, "rb") as f:
+                    try:
+                        existing_features = pickle.load(f)
+                        if not isinstance(existing_features, list):
+                            existing_features = list(existing_features)
+                    except EOFError:
+                        existing_features = []
+            else:
+                existing_features = []
+
+            # Ensure processed_features is a flat list
+            processed_features = np.array(processed_features).flatten().tolist()
+            
+            existing_features.append(processed_features)
+
+            # Save updated data back to file
             with open(STRUCTURED_DATA_PATH, "wb") as f:
-                pickle.dump([processed_features.tolist()], f)  # Always overwrite with the latest
+                pickle.dump(existing_features, f)
 
         logger.info("Structured data processed and stored successfully.")
         return {"message": "Structured data processed and stored successfully."}
     except Exception as e:
         logger.error(f"Error processing structured data: {str(e)}", exc_info=True)
         return {"error": f"An error occurred: {str(e)}"}
+
 
 @app.post("/process-image/")
 async def process_image(file: UploadFile = File(...)):
@@ -62,11 +81,28 @@ async def process_image(file: UploadFile = File(...)):
             buffer.write(await file.read())
 
         features = extract_image_features(image_path)
-
-        # Store only the latest processed image feature
+        logger.info(f"Processed features shape: {features.shape}")
+        
+        
         with file_lock:
+            # Load existing image features if available
+            if os.path.exists(IMAGE_FEATURES_PATH):
+                with open(IMAGE_FEATURES_PATH, "rb") as f:
+                    try:
+                        existing_features = pickle.load(f)
+                        if not isinstance(existing_features, list):
+                            existing_features = list(existing_features)
+                    except EOFError:
+                        existing_features = []
+            else:
+                existing_features = []
+
+            # Append new image features
+            existing_features.append(features.tolist())
+
+            # Save updated image features back to file
             with open(IMAGE_FEATURES_PATH, "wb") as f:
-                pickle.dump([features.tolist()], f)  # Overwrite with latest feature
+                pickle.dump(existing_features, f)
 
         # Remove temporary image after processing
         os.remove(image_path)
@@ -76,6 +112,7 @@ async def process_image(file: UploadFile = File(...)):
     except Exception as e:
         logger.error(f"Error processing image: {str(e)}", exc_info=True)
         return {"error": f"An error occurred: {str(e)}"}
+
 
 @app.post("/predict-claim/")
 async def predict_claim():
