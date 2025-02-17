@@ -4,60 +4,67 @@ from datetime import datetime, timedelta
 import os
 import shutil
 
-# Define source and destination paths
-TEST_IMAGE_SRC = "images/test_images/"
-RAW_IMAGE_DEST = "data/raw/images/"
+# Define paths
+RETRAIN_DATA_FILE = "Fast_Furious_Insured/data/retrain_data.csv"
+RAW_DATA_FILE = "Fast_Furious_Insured/raw_data/retrain_data.csv"
 
-STRUCTURED_DATA_SRC = "raw_data/"
-RAW_STRUCTURED_DATA_DEST = "data/raw/structured_data/"
+RETRAIN_IMAGES_DIR = "Fast_Furious_Insured/images/retrain_images"
+TRAIN_IMAGES_DIR = "Fast_Furious_Insured/images/train_images"
 
-# Function to move images
+def move_csv_file():
+    """Move retrain_data.csv to raw folder, avoiding duplication."""
+    if os.path.exists(RETRAIN_DATA_FILE):  # Ensure file exists
+        if not os.path.exists(RAW_DATA_FILE):  # Move only if not already present
+            shutil.move(RETRAIN_DATA_FILE, RAW_DATA_FILE)
+            print(f"Moved CSV: {RETRAIN_DATA_FILE} → {RAW_DATA_FILE}")
+        else:
+            print(f"Skipped CSV (Already Exists): {RAW_DATA_FILE}")
+
 def move_images():
-    if not os.path.exists(RAW_IMAGE_DEST):
-        os.makedirs(RAW_IMAGE_DEST)
+    """Move new images from retrain_images to train_images, avoiding duplicates."""
+    if not os.path.exists(TRAIN_IMAGES_DIR):
+        os.makedirs(TRAIN_IMAGES_DIR)
 
-    for file in os.listdir(TEST_IMAGE_SRC):
-        src = os.path.join(TEST_IMAGE_SRC, file)
-        dest = os.path.join(RAW_IMAGE_DEST, file)
-        shutil.move(src, dest)
+    for file_name in os.listdir(RETRAIN_IMAGES_DIR):
+        src_path = os.path.join(RETRAIN_IMAGES_DIR, file_name)
+        dest_path = os.path.join(TRAIN_IMAGES_DIR, file_name)
 
-# Function to move structured data (test.csv)
-def move_structured_data():
-    if not os.path.exists(RAW_STRUCTURED_DATA_DEST):
-        os.makedirs(RAW_STRUCTURED_DATA_DEST)
+        if os.path.isfile(src_path) and not os.path.exists(dest_path):
+            shutil.move(src_path, dest_path)
+            print(f"Moved Image: {file_name} → {TRAIN_IMAGES_DIR}")
+        else:
+            print(f"Skipped Image (Already Exists): {file_name}")
 
-    src_file = os.path.join(STRUCTURED_DATA_SRC, "test.csv")
-    dest_file = os.path.join(RAW_STRUCTURED_DATA_DEST, "test.csv")
-
-    if os.path.exists(src_file):
-        shutil.move(src_file, dest_file)
-    else:
-        print(f"File {src_file} not found.")
-
-# DAG definition (manual trigger)
+# Define default DAG arguments
 default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "start_date": datetime(2025, 2, 11),
-    "retries": 1,
-    "retry_delay": timedelta(minutes=5),
+    'owner': 'airflow',
+    'depends_on_past': False,
+    'start_date': datetime(2024, 2, 18),
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
 }
 
-with DAG(
-    "data_ingestion_dag",
+# Define DAG
+dag = DAG(
+    'data_ingestion_dag',
     default_args=default_args,
-    schedule_interval=None,  # Manual trigger only
-    catchup=False,
-) as dag:
+    description='DAG to ingest new training data (CSV + images)',
+    schedule_interval='@daily',
+    catchup=False
+)
 
-    ingest_images = PythonOperator(
-        task_id="move_images",
-        python_callable=move_images,
-    )
+# Define tasks
+ingest_csv_task = PythonOperator(
+    task_id='ingest_csv_data',
+    python_callable=move_csv_file,
+    dag=dag
+)
 
-    ingest_structured_data = PythonOperator(
-        task_id="move_structured_data",
-        python_callable=move_structured_data,
-    )
+ingest_images_task = PythonOperator(
+    task_id='ingest_image_data',
+    python_callable=move_images,
+    dag=dag
+)
 
-    ingest_images >> ingest_structured_data  # Ensuring images move first
+# DAG execution order
+ingest_csv_task >> ingest_images_task
