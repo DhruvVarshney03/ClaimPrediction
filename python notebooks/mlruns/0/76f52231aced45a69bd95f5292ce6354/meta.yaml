@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python%20notebooks/mlruns/0/76f52231aced45a69bd95f5292ce6354/artifacts
+end_time: 1740144404098
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 76f52231aced45a69bd95f5292ce6354
+run_name: upset-dove-639
+run_uuid: 76f52231aced45a69bd95f5292ce6354
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740143985200
+status: 3
+tags: []
+user_id: varsh

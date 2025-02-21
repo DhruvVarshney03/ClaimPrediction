@@ -1,14 +1,19 @@
 services:
   api:
-    build: ./api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    restart: always
     volumes:
       - ./api/processed_data:/app/processed_data  # Persist .pkl files
-    restart: always
+      - ./api/logs:/app/logs  # Persist logs
 
   airflow-init:
-    image: apache/airflow:latest
+    build:
+      context: ./airflow-docker
+      dockerfile: Dockerfile
     container_name: airflow_init
     depends_on:
       - postgres
@@ -17,8 +22,11 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
-    entrypoint: ["/bin/bash", "-c", "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com"]
-  
+    entrypoint: >
+      bash -c "
+      airflow db upgrade &&
+      (airflow users list | grep -q 'admin' || airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com)"
+
   postgres:
     image: postgres:13
     container_name: airflow_postgres
@@ -36,7 +44,9 @@ services:
     restart: always
 
   airflow-webserver:
-    image: apache/airflow:latest
+    build:
+      context: ./airflow-docker
+      dockerfile: Dockerfile
     container_name: airflow_webserver
     restart: always
     depends_on:
@@ -48,16 +58,22 @@ services:
       AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
       AIRFLOW__WEBSERVER__SECRET_KEY: my_secret_key
+      PYTHONPATH: /app/api:/opt/airflow/dags
     ports:
       - "8080:8080"
     volumes:
       - ./airflow-docker/dags:/opt/airflow/dags
       - ./airflow-docker/logs:/opt/airflow/logs
       - ./airflow-docker/plugins:/opt/airflow/plugins
-    command: webserver
+      - ./api:/app/api
+      - ./data:/opt/airflow/data  # ✅ Fixed Data Mount
+      - ./images:/opt/airflow/images  # ✅ Fixed Image Mount
+    command: airflow webserver
 
   airflow-scheduler:
-    image: apache/airflow:latest
+    build:
+      context: ./airflow-docker
+      dockerfile: Dockerfile
     container_name: airflow_scheduler
     restart: always
     depends_on:
@@ -69,14 +85,20 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+      PYTHONPATH: /app/api:/opt/airflow/dags
     volumes:
       - ./airflow-docker/dags:/opt/airflow/dags
       - ./airflow-docker/logs:/opt/airflow/logs
       - ./airflow-docker/plugins:/opt/airflow/plugins
-    command: scheduler
+      - ./api:/app/api
+      - ./data:/opt/airflow/data  # ✅ Fixed Data Mount
+      - ./images:/opt/airflow/images  # ✅ Fixed Image Mount
+    command: airflow scheduler
 
   airflow-worker:
-    image: apache/airflow:latest
+    build:
+      context: ./airflow-docker
+      dockerfile: Dockerfile
     container_name: airflow_worker
     restart: always
     depends_on:
@@ -88,11 +110,16 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+      PYTHONPATH: /app/api:/opt/airflow/dags
     volumes:
       - ./airflow-docker/dags:/opt/airflow/dags
       - ./airflow-docker/logs:/opt/airflow/logs
       - ./airflow-docker/plugins:/opt/airflow/plugins
-    command: celery worker
+      - ./api:/app/api
+      - ./data:/opt/airflow/data  # ✅ Fixed Data Mount
+      - ./images:/opt/airflow/images  # ✅ Fixed Image Mount
+    command: airflow celery worker
 
 volumes:
   postgres_data:
+    driver: local

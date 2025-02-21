@@ -1,45 +1,63 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.utils.dates import days_ago
 from datetime import datetime, timedelta
 import os
 import shutil
 
 # Define paths
-RETRAIN_DATA_FILE = "Fast_Furious_Insured/data/retrain_data.csv"
-RAW_DATA_FILE = "Fast_Furious_Insured/raw_data/retrain_data.csv"
+RETRAIN_DATA_FILE = "/opt/airflow/data/retrain_data.csv"
+RAW_DATA_FILE = "/opt/airflow/data/raw_data/retrain_data.csv"
 
-RETRAIN_IMAGES_DIR = "Fast_Furious_Insured/images/retrain_images"
-TRAIN_IMAGES_DIR = "Fast_Furious_Insured/images/train_images"
+RETRAIN_IMAGES_DIR = "/opt/airflow/images/retrain_images"
+TRAIN_IMAGES_DIR = "/opt/airflow/images/train_images"
+
 
 def move_csv_file():
     """Move retrain_data.csv to raw folder, avoiding duplication."""
-    if os.path.exists(RETRAIN_DATA_FILE):  # Ensure file exists
-        if not os.path.exists(RAW_DATA_FILE):  # Move only if not already present
-            shutil.move(RETRAIN_DATA_FILE, RAW_DATA_FILE)
-            print(f"Moved CSV: {RETRAIN_DATA_FILE} → {RAW_DATA_FILE}")
+    try:
+        os.makedirs(os.path.dirname(RAW_DATA_FILE), exist_ok=True)  # Ensure directory exists
+
+        if os.path.exists(RETRAIN_DATA_FILE):  # Ensure file exists
+            if not os.path.exists(RAW_DATA_FILE):  # Move only if not already present
+                shutil.move(RETRAIN_DATA_FILE, RAW_DATA_FILE)
+                print(f"Moved CSV: {RETRAIN_DATA_FILE} → {RAW_DATA_FILE}")
+            else:
+                print(f"Skipped CSV (Already Exists): {RAW_DATA_FILE}")
         else:
-            print(f"Skipped CSV (Already Exists): {RAW_DATA_FILE}")
+            print(f"CSV file not found: {RETRAIN_DATA_FILE}")
+
+    except Exception as e:
+        print(f"Error moving CSV: {e}")
 
 def move_images():
     """Move new images from retrain_images to train_images, avoiding duplicates."""
-    if not os.path.exists(TRAIN_IMAGES_DIR):
-        os.makedirs(TRAIN_IMAGES_DIR)
+    try:
+        os.makedirs(TRAIN_IMAGES_DIR, exist_ok=True)
 
-    for file_name in os.listdir(RETRAIN_IMAGES_DIR):
-        src_path = os.path.join(RETRAIN_IMAGES_DIR, file_name)
-        dest_path = os.path.join(TRAIN_IMAGES_DIR, file_name)
+        if not os.path.exists(RETRAIN_IMAGES_DIR) or not os.listdir(RETRAIN_IMAGES_DIR):
+            print("No new images to move.")
+            return
 
-        if os.path.isfile(src_path) and not os.path.exists(dest_path):
-            shutil.move(src_path, dest_path)
-            print(f"Moved Image: {file_name} → {TRAIN_IMAGES_DIR}")
-        else:
-            print(f"Skipped Image (Already Exists): {file_name}")
+        for file_name in os.listdir(RETRAIN_IMAGES_DIR):
+            src_path = os.path.join(RETRAIN_IMAGES_DIR, file_name)
+            dest_path = os.path.join(TRAIN_IMAGES_DIR, file_name)
+
+            if os.path.isfile(src_path) and not os.path.exists(dest_path):
+                shutil.copy2(src_path, dest_path)  # Copy before deleting
+                os.remove(src_path)
+                print(f"Moved Image: {file_name} → {TRAIN_IMAGES_DIR}")
+            else:
+                print(f"Skipped Image (Already Exists): {file_name}")
+
+    except Exception as e:
+        print(f"Error moving images: {e}")
 
 # Define default DAG arguments
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2024, 2, 18),
+    'start_date': days_ago(1),  # Dynamic start date
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
