@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/b8334d87294d4862b182f1b63c27e75b/artifacts
+end_time: 1740729892776
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b8334d87294d4862b182f1b63c27e75b
+run_name: enthused-panda-880
+run_uuid: b8334d87294d4862b182f1b63c27e75b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740729515394
+status: 3
+tags: []
+user_id: varsh

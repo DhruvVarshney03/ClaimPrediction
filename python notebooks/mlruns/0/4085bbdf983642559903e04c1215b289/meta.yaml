@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/4085bbdf983642559903e04c1215b289/artifacts
+end_time: 1740731172769
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4085bbdf983642559903e04c1215b289
+run_name: burly-ram-622
+run_uuid: 4085bbdf983642559903e04c1215b289
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740731137233
+status: 4
+tags: []
+user_id: varsh

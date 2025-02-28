@@ -1,25 +1,21 @@
-# Use an official Python runtime as a parent image
-FROM python:3.11
+# Use a slim Python image to reduce size
+FROM python:3.11-slim
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the necessary files into the container
-COPY requirements.txt .
-COPY main.py .
-COPY preprocessing.py .
-COPY image_processing.py .
-COPY model_loader.py .
-COPY models/ models/
-COPY processed_data/ processed_data/
-COPY scalers/ scalers/
+# Install system dependencies required by OpenCV
+RUN apt-get update && \
+    apt-get install -y libgl1-mesa-glx libglib2.0-0 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y libgl1-mesa-glx
+# Copy application files efficiently
+COPY . .
 
-# Install dependencies
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port on which FastAPI will run
+# Expose FastAPI port
 EXPOSE 8000
 
 # Run the FastAPI application

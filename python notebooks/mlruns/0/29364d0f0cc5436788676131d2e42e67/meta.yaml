@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/29364d0f0cc5436788676131d2e42e67/artifacts
+end_time: 1740577426420
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 29364d0f0cc5436788676131d2e42e67
+run_name: fearless-finch-188
+run_uuid: 29364d0f0cc5436788676131d2e42e67
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740577156796
+status: 3
+tags: []
+user_id: varsh

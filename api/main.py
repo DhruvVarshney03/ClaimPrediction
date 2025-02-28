@@ -38,7 +38,7 @@ async def process_structured(data: dict = Body(...)):
     """
     try:
         logger.info(f"Received Structured Data: {data}")
-        processed_features = preprocess_data(data)
+        processed_features = preprocess_data(data, for_training=False) # ✅ Exclude Condition & Amount
         logger.info(f"Processed features type: {type(processed_features)}, value: {processed_features}, shape: {processed_features.shape}")
 
         with file_lock:

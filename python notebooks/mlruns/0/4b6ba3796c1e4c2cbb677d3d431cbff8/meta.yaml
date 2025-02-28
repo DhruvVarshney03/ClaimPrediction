@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/4b6ba3796c1e4c2cbb677d3d431cbff8/artifacts
+end_time: 1740729491426
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4b6ba3796c1e4c2cbb677d3d431cbff8
+run_name: big-owl-243
+run_uuid: 4b6ba3796c1e4c2cbb677d3d431cbff8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740729463115
+status: 4
+tags: []
+user_id: varsh

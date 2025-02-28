@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/e33ec82489f241758b71599122ca9e16/artifacts
+end_time: 1740729368179
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e33ec82489f241758b71599122ca9e16
+run_name: worried-bird-982
+run_uuid: e33ec82489f241758b71599122ca9e16
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740729174727
+status: 4
+tags: []
+user_id: varsh

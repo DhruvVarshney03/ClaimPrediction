@@ -6,47 +6,45 @@ import os
 import shutil
 
 # Define paths
-RETRAIN_DATA_FILE = "/opt/airflow/data/retrain_data.csv"
-RAW_DATA_FILE = "/opt/airflow/data/raw_data/retrain_data.csv"
+CSV_SOURCE_PATH = "/opt/airflow/data/raw_data/retrain_data.csv"
+CSV_DESTINATION_PATH = "/opt/airflow/data/retrain_data.csv"
 
-RETRAIN_IMAGES_DIR = "/opt/airflow/images/retrain_images"
-TRAIN_IMAGES_DIR = "/opt/airflow/images/train_images"
-
+IMAGE_SOURCE_DIR = "/opt/airflow/data/images/retrain_images"  # Directory containing new images
+IMAGE_DESTINATION_DIR = "/opt/airflow/data/images/test_images"  # Final storage directory
 
 def move_csv_file():
     """Move retrain_data.csv to raw folder, avoiding duplication."""
     try:
-        os.makedirs(os.path.dirname(RAW_DATA_FILE), exist_ok=True)  # Ensure directory exists
+        os.makedirs(os.path.dirname(CSV_DESTINATION_PATH), exist_ok=True)  # Ensure directory exists
 
-        if os.path.exists(RETRAIN_DATA_FILE):  # Ensure file exists
-            if not os.path.exists(RAW_DATA_FILE):  # Move only if not already present
-                shutil.move(RETRAIN_DATA_FILE, RAW_DATA_FILE)
-                print(f"Moved CSV: {RETRAIN_DATA_FILE} → {RAW_DATA_FILE}")
+        if os.path.exists(CSV_SOURCE_PATH):  # Ensure file exists
+            if not os.path.exists(CSV_DESTINATION_PATH):  # Move only if not already present
+                shutil.move(CSV_SOURCE_PATH, CSV_DESTINATION_PATH)
+                print(f"Moved CSV: {CSV_SOURCE_PATH} → {CSV_DESTINATION_PATH}")
             else:
-                print(f"Skipped CSV (Already Exists): {RAW_DATA_FILE}")
+                print(f"Skipped CSV (Already Exists): {CSV_DESTINATION_PATH}")
         else:
-            print(f"CSV file not found: {RETRAIN_DATA_FILE}")
+            print(f"CSV file not found: {CSV_SOURCE_PATH}")
 
     except Exception as e:
         print(f"Error moving CSV: {e}")
 
 def move_images():
-    """Move new images from retrain_images to train_images, avoiding duplicates."""
+    """Move new images from source directory to destination, avoiding duplicates."""
     try:
-        os.makedirs(TRAIN_IMAGES_DIR, exist_ok=True)
+        os.makedirs(IMAGE_DESTINATION_DIR, exist_ok=True)
 
-        if not os.path.exists(RETRAIN_IMAGES_DIR) or not os.listdir(RETRAIN_IMAGES_DIR):
+        if not os.path.exists(IMAGE_SOURCE_DIR) or not os.listdir(IMAGE_SOURCE_DIR):
             print("No new images to move.")
             return
 
-        for file_name in os.listdir(RETRAIN_IMAGES_DIR):
-            src_path = os.path.join(RETRAIN_IMAGES_DIR, file_name)
-            dest_path = os.path.join(TRAIN_IMAGES_DIR, file_name)
+        for file_name in os.listdir(IMAGE_SOURCE_DIR):
+            source_image_path = os.path.join(IMAGE_SOURCE_DIR, file_name)
+            destination_image_path = os.path.join(IMAGE_DESTINATION_DIR, file_name)
 
-            if os.path.isfile(src_path) and not os.path.exists(dest_path):
-                shutil.copy2(src_path, dest_path)  # Copy before deleting
-                os.remove(src_path)
-                print(f"Moved Image: {file_name} → {TRAIN_IMAGES_DIR}")
+            if os.path.isfile(source_image_path) and not os.path.exists(destination_image_path):
+                shutil.move(source_image_path, destination_image_path)  # Move instead of copy
+                print(f"Moved Image: {file_name} → {IMAGE_DESTINATION_DIR}")
             else:
                 print(f"Skipped Image (Already Exists): {file_name}")
 

@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/07c9c14c109545c2a4e2e6721b36597d/artifacts
+end_time: 1740730417482
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 07c9c14c109545c2a4e2e6721b36597d
+run_name: unleashed-eel-635
+run_uuid: 07c9c14c109545c2a4e2e6721b36597d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1740730125960
+status: 4
+tags: []
+user_id: varsh

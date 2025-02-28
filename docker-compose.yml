@@ -1,14 +1,15 @@
 services:
-  api:
-    build:
-      context: ./api
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    restart: always
-    volumes:
-      - ./api/processed_data:/app/processed_data  # Persist .pkl files
-      - ./api/logs:/app/logs  # Persist logs
+  # api:
+  #   build:
+  #     context: ./api
+  #     dockerfile: Dockerfile
+  #   container_name: claim_prediction_api
+  #   ports:
+  #     - "8000:8000"
+  #   restart: always
+  #   volumes:
+  #     - ./api/processed_data:/app/processed_data  # Persist .pkl files
+  #     - ./api/logs:/app/logs  # Persist logs
 
   airflow-init:
     build:
@@ -55,19 +56,13 @@ services:
     environment:
       AIRFLOW__CORE__EXECUTOR: CeleryExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
-      AIRFLOW__WEBSERVER__SECRET_KEY: my_secret_key
-      PYTHONPATH: /app/api:/opt/airflow/dags
     ports:
       - "8080:8080"
     volumes:
       - ./airflow-docker/dags:/opt/airflow/dags
       - ./airflow-docker/logs:/opt/airflow/logs
       - ./airflow-docker/plugins:/opt/airflow/plugins
-      - ./api:/app/api
-      - ./data:/opt/airflow/data  # ✅ Fixed Data Mount
-      - ./images:/opt/airflow/images  # ✅ Fixed Image Mount
     command: airflow webserver
 
   airflow-scheduler:
@@ -78,21 +73,14 @@ services:
     restart: always
     depends_on:
       - postgres
-      - redis
       - airflow-webserver
     environment:
       AIRFLOW__CORE__EXECUTOR: CeleryExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
-      AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
-      PYTHONPATH: /app/api:/opt/airflow/dags
     volumes:
       - ./airflow-docker/dags:/opt/airflow/dags
       - ./airflow-docker/logs:/opt/airflow/logs
       - ./airflow-docker/plugins:/opt/airflow/plugins
-      - ./api:/app/api
-      - ./data:/opt/airflow/data  # ✅ Fixed Data Mount
-      - ./images:/opt/airflow/images  # ✅ Fixed Image Mount
     command: airflow scheduler
 
   airflow-worker:
@@ -104,20 +92,16 @@ services:
     depends_on:
       - postgres
       - redis
-      - airflow-webserver
     environment:
       AIRFLOW__CORE__EXECUTOR: CeleryExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-      AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
       AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
-      PYTHONPATH: /app/api:/opt/airflow/dags
     volumes:
       - ./airflow-docker/dags:/opt/airflow/dags
       - ./airflow-docker/logs:/opt/airflow/logs
       - ./airflow-docker/plugins:/opt/airflow/plugins
+      - ./data:/opt/airflow/data  # ✅ Required for ingestion & training
       - ./api:/app/api
-      - ./data:/opt/airflow/data  # ✅ Fixed Data Mount
-      - ./images:/opt/airflow/images  # ✅ Fixed Image Mount
     command: airflow celery worker
 
 volumes:
