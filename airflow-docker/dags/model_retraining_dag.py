@@ -6,13 +6,14 @@ import os
 import logging
 import json
 import time
+import shutil
 
 # Paths
 FINAL_DATA_PATH = "/app/api/processed_data/final_data.pkl"
 MODEL_DIR = "/app/api/models/"
 BEST_MODEL_PATH = os.path.join(MODEL_DIR, "best_model.keras")
+BACKUP_MODEL_PATH = os.path.join(MODEL_DIR, "backup_best_model.keras")
 MODEL_METADATA_PATH = os.path.join(MODEL_DIR, "models_metadata.json")
-OPTIMIZER_STATE_PATH = os.path.join(MODEL_DIR, "optimizer_weights.pkl")
 
 # Logging setup
 logging.basicConfig(level=logging.INFO)
@@ -24,7 +25,7 @@ def fine_tune_model():
     import mlflow
     import tensorflow as tf
     from tensorflow.keras.models import load_model
-    from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+    from tensorflow.keras.callbacks import ModelCheckpoint
 
     logging.info("Starting model fine-tuning...")
 
@@ -32,21 +33,20 @@ def fine_tune_model():
         logging.error("Final dataset not found. Cannot train.")
         return
 
-    # Load the dataset
+    # Load dataset
     data = joblib.load(FINAL_DATA_PATH)
-    logging.info(f"All Columns: {list(data.columns)}")
+    logging.info(f"Columns in dataset: {list(data.columns)}")
 
-    # Drop unnecessary columns and ensure structured data is numeric
-    columns_to_drop = [data.columns[0], data.columns[5], data.columns[6]]
-    structured_data = data.iloc[:, :18].drop(columns=columns_to_drop).astype(np.float32).values
+    # Drop unnecessary columns
+    structured_data = data.iloc[:, :18].drop(columns=[data.columns[0], data.columns[5], data.columns[6]]).astype(np.float32).values
     image_features = data.iloc[:, 18:].astype(np.float32).values
     condition_labels = data.iloc[:, -2].astype(np.float32).values
     amount_labels = data.iloc[:, -1].astype(np.float32).values.reshape(-1, 1)
 
-    logging.info(f"Structured Data Shape: {structured_data.shape}, Type: {structured_data.dtype}")
-    logging.info(f"Image Features Shape: {image_features.shape}, Type: {image_features.dtype}")
-    logging.info(f"Condition Labels Shape: {condition_labels.shape}, Type: {condition_labels.dtype}")
-    logging.info(f"Amount Labels Shape: {amount_labels.shape}, Type: {amount_labels.dtype}")
+    logging.info(f"Structured Data Shape: {structured_data.shape}")
+    logging.info(f"Image Features Shape: {image_features.shape}")
+    logging.info(f"Condition Labels Shape: {condition_labels.shape}")
+    logging.info(f"Amount Labels Shape: {amount_labels.shape}")
 
     assert structured_data.shape[0] == image_features.shape[0], "Mismatch in batch size!"
 
@@ -54,33 +54,20 @@ def fine_tune_model():
         logging.error("Best model not found! Cannot fine-tune.")
         return
 
-    model = load_model(BEST_MODEL_PATH, compile=False)
-
-    # Restore optimizer state if available
-    try:
-        if os.path.exists(OPTIMIZER_STATE_PATH):
-            with open(OPTIMIZER_STATE_PATH, "rb") as f:
-                optimizer_weights = joblib.load(f)
-            if model.optimizer is not None:
-                model.optimizer.set_weights(optimizer_weights)
-                logging.info("Restored optimizer state.")
-            else:
-                logging.warning("Model optimizer is None. Skipping optimizer state restoration.")
-        else:
-            logging.warning("Optimizer state not found. Training may not continue seamlessly.")
-    except Exception as e:
-        logging.error(f"Error restoring optimizer state: {e}")
+    # Load and compile model
+    model = load_model(BEST_MODEL_PATH)
+    logging.info(f"Expected Model Input Shape: {model.input_shape}")
 
     model.compile(
-        optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+        optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
         loss={
             "condition_output": "sparse_categorical_crossentropy",
-            "amount_output": "huber_loss",
+            "amount_output": tf.keras.losses.Huber()
         },
         metrics={"condition_output": "accuracy", "amount_output": "mae"},
     )
 
-    early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+    # Callbacks
     model_version = f"fine_tuned_model_{int(time.time())}.keras"
     new_model_path = os.path.join(MODEL_DIR, model_version)
     checkpoint = ModelCheckpoint(new_model_path, monitor='val_loss', save_best_only=True, mode='min')
@@ -89,16 +76,22 @@ def fine_tune_model():
         with mlflow.start_run():
             history = model.fit(
                 [image_features, structured_data],
-                {'condition_output': condition_labels, 'amount_output': amount_labels},
-                epochs=50,
+                {"condition_output": condition_labels, "amount_output": amount_labels},
+                epochs=3,
                 batch_size=32,
                 validation_split=0.2,
-                callbacks=[early_stopping, checkpoint],
+                callbacks=[checkpoint],
                 verbose=1
             )
 
             val_loss = min(history.history["val_loss"])
+            condition_accuracy = max(history.history["val_condition_output_accuracy"])
+            amount_mae = min(history.history["val_amount_output_mae"])
+            logging.info(f"New model validation loss: {val_loss}")
+            logging.info(f"New model condition accuracy: {condition_accuracy}")
+            logging.info(f"New model amount MAE: {amount_mae}")
 
+            # Load metadata
             metadata = {}
             if os.path.exists(MODEL_METADATA_PATH):
                 with open(MODEL_METADATA_PATH, "r") as f:
@@ -106,58 +99,31 @@ def fine_tune_model():
 
             previous_best_loss = min(metadata.values()) if metadata else float("inf")
             logging.info(f"Previous best validation loss: {previous_best_loss}")
-            logging.info(f"New model validation loss: {val_loss}")
 
-            # Save the new model only if it performs better
+            # Save only if new model is better
             if val_loss < previous_best_loss:
+                # Backup current best model
+                if os.path.exists(BEST_MODEL_PATH):
+                    shutil.copy(BEST_MODEL_PATH, BACKUP_MODEL_PATH)
+                    logging.info(f"Backup of old best model saved: {BACKUP_MODEL_PATH}")
+                
                 metadata[new_model_path] = val_loss
                 with open(MODEL_METADATA_PATH, "w") as f:
                     json.dump(metadata, f, indent=4)
 
-                with open(OPTIMIZER_STATE_PATH, "wb") as f:
-                    joblib.dump(model.optimizer.get_weights(), f)
-                logging.info("Saved optimizer state.")
-
+                shutil.copy(new_model_path, BEST_MODEL_PATH)
                 mlflow.tensorflow.log_model(model, artifact_path=new_model_path)
-                logging.info(f"Fine-tuned model saved: {new_model_path}")
+                mlflow.log_metric("val_loss", val_loss)
+                mlflow.log_metric("condition_accuracy", condition_accuracy)
+                mlflow.log_metric("amount_mae", amount_mae)
+                logging.info(f"Fine-tuned model saved as new best: {BEST_MODEL_PATH}")
             else:
-                logging.info("New model did not outperform the previous best model. Discarding.")
+                logging.info("New model did not outperform the previous best. Keeping the old model.")
 
     except Exception as e:
         logging.error(f"Error during fine-tuning: {e}")
 
-def select_best_model():
-    """Selects the best model based on validation loss."""
-    import shutil
-
-    logging.info("Selecting the best model...")
-
-    if not os.path.exists(MODEL_METADATA_PATH):
-        logging.warning("No models available for selection.")
-        return
-
-    with open(MODEL_METADATA_PATH, "r") as f:
-        metadata = json.load(f)
-
-    if not metadata:
-        logging.warning("Model metadata is empty. Keeping the current best model.")
-        return
-
-    existing_models = {k: v for k, v in metadata.items() if os.path.exists(k)}
-
-    if not existing_models:
-        logging.warning("No valid models found on disk. Keeping the current best model.")
-        return
-
-    best_model = min(existing_models, key=existing_models.get)
-    best_loss = existing_models[best_model]
-
-    if os.path.abspath(best_model) != os.path.abspath(BEST_MODEL_PATH):
-        shutil.copy(best_model, BEST_MODEL_PATH)
-        logging.info(f"Best model selected: {best_model} with validation loss: {best_loss}")
-    else:
-        logging.info(f"Current best model is already the optimal choice: {BEST_MODEL_PATH}")
-
+# DAG Definition
 default_args = {
     'owner': 'airflow',
     'retries': 1,
@@ -168,7 +134,6 @@ default_args = {
 with DAG('model_retraining_dag', default_args=default_args, schedule_interval=None, catchup=False) as dag:
     start_task = DummyOperator(task_id='start')
     fine_tune_task = PythonOperator(task_id='fine_tune_model', python_callable=fine_tune_model)
-    select_best_task = PythonOperator(task_id='select_best_model', python_callable=select_best_model)
     end_task = DummyOperator(task_id='end')
 
-    start_task >> fine_tune_task >> select_best_task >> end_task
+    start_task >> fine_tune_task >> end_task
