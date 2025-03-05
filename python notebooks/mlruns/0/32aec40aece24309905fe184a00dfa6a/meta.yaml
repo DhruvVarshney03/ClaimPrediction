@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/32aec40aece24309905fe184a00dfa6a/artifacts
+end_time: 1741151766854
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 32aec40aece24309905fe184a00dfa6a
+run_name: whimsical-shrew-436
+run_uuid: 32aec40aece24309905fe184a00dfa6a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741151543559
+status: 3
+tags: []
+user_id: varsh
