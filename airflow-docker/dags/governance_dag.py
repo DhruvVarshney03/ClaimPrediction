@@ -107,8 +107,19 @@ def check_model_drift():
         
 
         logging.info("🔮 Generating predictions...")
-        new_data["prediction"] = np.array(model.predict([image_features_new, structured_data_new])).flatten()
-        reference_data["prediction"] = np.array(model.predict([image_features_ref, structured_data_ref])).flatten()
+        # Generate predictions
+        predictions_new = model.predict([image_features_new, structured_data_new ])
+        predictions_ref = model.predict([image_features_ref, structured_data_ref ])
+
+        # Extract amount predictions (second output of the model)
+        amount_predictions_new = np.array(predictions_new[1]).flatten()
+        amount_predictions_ref = np.array(predictions_ref[1]).flatten()
+
+        # Store predictions in the respective DataFrames
+        new_data["prediction"] = amount_predictions_new
+        reference_data["prediction"] = amount_predictions_ref
+        
+
         
 
         # Compute MSE and KS test on predictions
@@ -122,7 +133,7 @@ def check_model_drift():
             "mse_new": mse_new,
             "mse_drift": abs(mse_old - mse_new),
             "ks_p_value": p_value,
-            "drift_detected": p_value < 0.05
+            "drift_detected": bool(p_value < 0.05)
         }
 
         report_path = "/opt/airflow/logs/model_drift_report.json"

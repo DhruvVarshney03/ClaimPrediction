@@ -90,7 +90,6 @@ services:
       dockerfile: Dockerfile
     container_name: airflow_worker
     restart: always
-    mem_limit: 4g
     depends_on:
       - postgres
       - redis
