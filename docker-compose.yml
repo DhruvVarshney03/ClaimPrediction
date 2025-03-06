@@ -1,15 +1,15 @@
 services:
-  # api:
-  #   build:
-  #     context: ./api
-  #     dockerfile: Dockerfile
-  #   container_name: claim_prediction_api
-  #   ports:
-  #     - "8000:8000"
-  #   restart: always
-  #   volumes:
-  #     - ./api/processed_data:/app/processed_data  # Persist .pkl files
-  #     - ./api/logs:/app/logs  # Persist logs
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: claim_prediction_api
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - ./api/processed_data:/app/processed_data  # Persist .pkl files
+      - ./api/logs:/app/logs  # Persist logs
 
 
   airflow-init:
@@ -103,6 +103,12 @@ services:
       - ./airflow-docker/plugins:/opt/airflow/plugins
       - ./data:/opt/airflow/data  # ✅ Required for ingestion & training
       - ./api:/app/api
+    deploy:
+      resources:
+        limits:
+          memory: 6g  # ⬆️ Increase limit to 6GB
+        reservations:
+          memory: 4g  # ⬆️ Ensure at least 4GB is available
     command: airflow celery worker
 
 volumes:

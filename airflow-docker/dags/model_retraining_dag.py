@@ -112,7 +112,7 @@ def fine_tune_model():
                     json.dump(metadata, f, indent=4)
                 
                 shutil.move(new_model_path, BEST_MODEL_PATH)
-                mlflow.tensorflow.log_model(model, artifact_path=BEST_MODEL_PATH)
+                mlflow.tensorflow.log_model(model, artifact_path="best_model")
                 mlflow.log_metric("val_loss", val_loss)
                 mlflow.log_metric("condition_accuracy", condition_accuracy)
                 mlflow.log_metric("amount_mae", amount_mae)
