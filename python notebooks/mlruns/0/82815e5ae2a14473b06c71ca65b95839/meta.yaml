@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/82815e5ae2a14473b06c71ca65b95839/artifacts
+end_time: 1741342947440
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 82815e5ae2a14473b06c71ca65b95839
+run_name: intelligent-jay-24
+run_uuid: 82815e5ae2a14473b06c71ca65b95839
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741342947339
+status: 4
+tags: []
+user_id: varsh

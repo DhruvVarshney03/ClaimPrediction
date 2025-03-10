@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/3cd84d29ffcb4fd6854ebab275ff7a4f/artifacts
+end_time: 1741342604535
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 3cd84d29ffcb4fd6854ebab275ff7a4f
+run_name: dapper-doe-509
+run_uuid: 3cd84d29ffcb4fd6854ebab275ff7a4f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741342603258
+status: 4
+tags: []
+user_id: varsh

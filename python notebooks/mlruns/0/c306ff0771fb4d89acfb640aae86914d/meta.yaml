@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/c306ff0771fb4d89acfb640aae86914d/artifacts
+end_time: 1741348168763
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c306ff0771fb4d89acfb640aae86914d
+run_name: exultant-snake-986
+run_uuid: c306ff0771fb4d89acfb640aae86914d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741348166591
+status: 4
+tags: []
+user_id: varsh

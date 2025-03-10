@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/2454fad8b49d42f287454205c694db93/artifacts
+end_time: 1741343136293
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2454fad8b49d42f287454205c694db93
+run_name: upset-frog-431
+run_uuid: 2454fad8b49d42f287454205c694db93
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741343136164
+status: 4
+tags: []
+user_id: varsh

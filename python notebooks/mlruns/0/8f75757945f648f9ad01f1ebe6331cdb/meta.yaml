@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/8f75757945f648f9ad01f1ebe6331cdb/artifacts
+end_time: 1741341177681
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8f75757945f648f9ad01f1ebe6331cdb
+run_name: judicious-croc-695
+run_uuid: 8f75757945f648f9ad01f1ebe6331cdb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741341176577
+status: 4
+tags: []
+user_id: varsh

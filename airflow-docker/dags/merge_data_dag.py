@@ -64,14 +64,24 @@ default_args = {
     'start_date': datetime(2025, 2, 18),
 }
 
+default_args = {
+    'owner': 'airflow',
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+    'start_date': datetime(2025, 2, 18),
+}
+
 with DAG('data_merge_dag', default_args=default_args, schedule_interval='@daily', catchup=False) as dag:
     start_task = DummyOperator(task_id='start')
+    
     merge_task = PythonOperator(task_id='merge_data', python_callable=merge_data)
-    # trigger_retrain = TriggerDagRunOperator(
-    #     task_id='trigger_model_retraining',
-    #     trigger_dag_id='model_retraining_dag',
-    #     wait_for_completion=False
-    # )
+    
     end_task = DummyOperator(task_id='end')
 
-    start_task >> merge_task >> end_task  # Remove the trigger from the flow
+    trigger_retrain = TriggerDagRunOperator(
+        task_id='trigger_model_retraining',
+        trigger_dag_id='model_retraining_dag',
+        wait_for_completion=True  # Ensures sequential execution
+    )
+
+    start_task >> merge_task >> end_task >> trigger_retrain

@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/c64ba12c7d4340f8a76b18b539dac7dc/artifacts
+end_time: 1741343674328
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c64ba12c7d4340f8a76b18b539dac7dc
+run_name: valuable-mole-552
+run_uuid: c64ba12c7d4340f8a76b18b539dac7dc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741343674063
+status: 4
+tags: []
+user_id: varsh

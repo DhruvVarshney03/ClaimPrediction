@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/6ebbe66b09024d48968a100ca9f95d82/artifacts
+end_time: 1741339320567
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6ebbe66b09024d48968a100ca9f95d82
+run_name: persistent-smelt-275
+run_uuid: 6ebbe66b09024d48968a100ca9f95d82
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741339320394
+status: 4
+tags: []
+user_id: varsh

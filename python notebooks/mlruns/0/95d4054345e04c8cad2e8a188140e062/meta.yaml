@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/95d4054345e04c8cad2e8a188140e062/artifacts
+end_time: 1741347774507
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 95d4054345e04c8cad2e8a188140e062
+run_name: welcoming-fowl-153
+run_uuid: 95d4054345e04c8cad2e8a188140e062
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741347772558
+status: 4
+tags: []
+user_id: varsh

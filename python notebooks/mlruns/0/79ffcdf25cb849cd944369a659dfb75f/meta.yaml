@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/79ffcdf25cb849cd944369a659dfb75f/artifacts
+end_time: 1741349675280
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 79ffcdf25cb849cd944369a659dfb75f
+run_name: invincible-vole-948
+run_uuid: 79ffcdf25cb849cd944369a659dfb75f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741349673020
+status: 4
+tags: []
+user_id: varsh

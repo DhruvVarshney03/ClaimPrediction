@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
+from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from airflow.utils.dates import days_ago
 from datetime import datetime, timedelta
 import os
@@ -82,5 +83,12 @@ ingest_images_task = PythonOperator(
     dag=dag
 )
 
+trigger_processing = TriggerDagRunOperator(
+    task_id='trigger_data_processing',
+    trigger_dag_id='data_processing_dag',
+    wait_for_completion=True,  # Ensures sequential execution
+    dag=dag
+)
+
 # DAG execution order
-ingest_csv_task >> ingest_images_task
+ingest_csv_task >> ingest_images_task >> trigger_processing

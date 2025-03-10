@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/2659127fa1684053be25d6141d1d9684/artifacts
+end_time: 1741346279344
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2659127fa1684053be25d6141d1d9684
+run_name: thundering-deer-133
+run_uuid: 2659127fa1684053be25d6141d1d9684
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741346277249
+status: 4
+tags: []
+user_id: varsh
