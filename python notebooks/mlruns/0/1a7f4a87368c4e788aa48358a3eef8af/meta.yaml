@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/1a7f4a87368c4e788aa48358a3eef8af/artifacts
+end_time: 1741688980575
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1a7f4a87368c4e788aa48358a3eef8af
+run_name: enchanting-sow-883
+run_uuid: 1a7f4a87368c4e788aa48358a3eef8af
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741688750042
+status: 3
+tags: []
+user_id: varsh

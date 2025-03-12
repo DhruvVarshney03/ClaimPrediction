@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/5022c50edf514ca9a652482905c14c79/artifacts
+end_time: 1741686772013
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5022c50edf514ca9a652482905c14c79
+run_name: vaunted-boar-147
+run_uuid: 5022c50edf514ca9a652482905c14c79
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741686199705
+status: 3
+tags: []
+user_id: varsh

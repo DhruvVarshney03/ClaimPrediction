@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/b53a4121769d4ce5a0643d0251cc3ebe/artifacts
+end_time: 1741683541429
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b53a4121769d4ce5a0643d0251cc3ebe
+run_name: monumental-swan-293
+run_uuid: b53a4121769d4ce5a0643d0251cc3ebe
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741683405466
+status: 3
+tags: []
+user_id: varsh

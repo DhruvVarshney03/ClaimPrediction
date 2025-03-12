@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/1a8e07f3b37b4b848215dccd2c9e0293/artifacts
+end_time: 1741677546516
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1a8e07f3b37b4b848215dccd2c9e0293
+run_name: thoughtful-squid-676
+run_uuid: 1a8e07f3b37b4b848215dccd2c9e0293
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741676921805
+status: 3
+tags: []
+user_id: varsh

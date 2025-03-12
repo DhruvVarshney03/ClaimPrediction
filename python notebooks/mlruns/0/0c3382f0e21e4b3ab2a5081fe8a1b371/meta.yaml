@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/0c3382f0e21e4b3ab2a5081fe8a1b371/artifacts
+end_time: 1741691824710
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0c3382f0e21e4b3ab2a5081fe8a1b371
+run_name: loud-crab-992
+run_uuid: 0c3382f0e21e4b3ab2a5081fe8a1b371
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741691526410
+status: 3
+tags: []
+user_id: varsh

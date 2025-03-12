@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/d1b18a120b4c4adaab1e4d488b4d10b1/artifacts
+end_time: 1741687360014
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d1b18a120b4c4adaab1e4d488b4d10b1
+run_name: popular-cow-822
+run_uuid: d1b18a120b4c4adaab1e4d488b4d10b1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741687094852
+status: 3
+tags: []
+user_id: varsh

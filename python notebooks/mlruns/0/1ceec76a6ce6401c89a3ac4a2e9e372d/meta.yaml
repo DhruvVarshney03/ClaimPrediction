@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/1ceec76a6ce6401c89a3ac4a2e9e372d/artifacts
+end_time: 1741607359019
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1ceec76a6ce6401c89a3ac4a2e9e372d
+run_name: mercurial-moth-394
+run_uuid: 1ceec76a6ce6401c89a3ac4a2e9e372d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741606702750
+status: 3
+tags: []
+user_id: varsh

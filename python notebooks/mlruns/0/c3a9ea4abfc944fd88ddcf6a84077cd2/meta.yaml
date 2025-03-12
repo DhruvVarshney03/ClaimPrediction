@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/c3a9ea4abfc944fd88ddcf6a84077cd2/artifacts
+end_time: 1741776297523
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c3a9ea4abfc944fd88ddcf6a84077cd2
+run_name: glamorous-vole-201
+run_uuid: c3a9ea4abfc944fd88ddcf6a84077cd2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741775851757
+status: 3
+tags: []
+user_id: varsh

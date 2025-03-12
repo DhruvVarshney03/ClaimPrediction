@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/fc9c18dbd28f470fa5393d9671be88b5/artifacts
+end_time: 1741688139662
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: fc9c18dbd28f470fa5393d9671be88b5
+run_name: abrasive-conch-555
+run_uuid: fc9c18dbd28f470fa5393d9671be88b5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741687976044
+status: 3
+tags: []
+user_id: varsh

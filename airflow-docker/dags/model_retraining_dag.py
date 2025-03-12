@@ -88,7 +88,7 @@ def fine_tune_model():
             history = model.fit(
                 [image_features, structured_data],
                 {"condition_output": condition_labels, "amount_output": amount_labels},
-                epochs=10,
+                epochs=40,
                 batch_size=32,
                 validation_split=0.2,
                 callbacks=[checkpoint, early_stopping],

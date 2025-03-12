@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/9842e221c6ec437887a662b26c8246ad/artifacts
+end_time: 1741763369403
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9842e221c6ec437887a662b26c8246ad
+run_name: abrasive-seal-531
+run_uuid: 9842e221c6ec437887a662b26c8246ad
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741761106161
+status: 3
+tags: []
+user_id: varsh

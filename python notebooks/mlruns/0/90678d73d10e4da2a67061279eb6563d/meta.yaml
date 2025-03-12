@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/90678d73d10e4da2a67061279eb6563d/artifacts
+end_time: 1741768879858
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 90678d73d10e4da2a67061279eb6563d
+run_name: bright-koi-199
+run_uuid: 90678d73d10e4da2a67061279eb6563d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741768451280
+status: 3
+tags: []
+user_id: varsh

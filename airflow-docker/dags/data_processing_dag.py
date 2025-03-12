@@ -158,11 +158,11 @@ end = PythonOperator(
     dag=dag
 )
 
-trigger_merge = TriggerDagRunOperator(
-    task_id='trigger_data_merge',
-    trigger_dag_id='data_merge_dag',
-    wait_for_completion=True,
-    dag=dag
-)
+# trigger_merge = TriggerDagRunOperator(
+#     task_id='trigger_data_merge',
+#     trigger_dag_id='data_merge_dag',
+#     wait_for_completion=True,
+#     dag=dag
+# )
 
-start >> process_data_task >> end >> trigger_merge
+start >> process_data_task >> end

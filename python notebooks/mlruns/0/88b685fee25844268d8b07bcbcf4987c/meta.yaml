@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/88b685fee25844268d8b07bcbcf4987c/artifacts
+end_time: 1741773715388
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 88b685fee25844268d8b07bcbcf4987c
+run_name: blushing-dog-425
+run_uuid: 88b685fee25844268d8b07bcbcf4987c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741773583363
+status: 3
+tags: []
+user_id: varsh

@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/a59a2a8d7b19461e905dae31f04781cf/artifacts
+end_time: 1741759056524
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a59a2a8d7b19461e905dae31f04781cf
+run_name: chill-hawk-866
+run_uuid: a59a2a8d7b19461e905dae31f04781cf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741758554478
+status: 3
+tags: []
+user_id: varsh

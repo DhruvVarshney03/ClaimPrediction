@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/21489aac656d4d38ac20bded33166c11/artifacts
+end_time: 1741685901154
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 21489aac656d4d38ac20bded33166c11
+run_name: nimble-snail-404
+run_uuid: 21489aac656d4d38ac20bded33166c11
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741685362726
+status: 3
+tags: []
+user_id: varsh

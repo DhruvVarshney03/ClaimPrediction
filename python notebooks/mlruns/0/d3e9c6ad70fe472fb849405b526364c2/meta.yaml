@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/d3e9c6ad70fe472fb849405b526364c2/artifacts
+end_time: 1741693251574
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: d3e9c6ad70fe472fb849405b526364c2
+run_name: worried-chimp-578
+run_uuid: d3e9c6ad70fe472fb849405b526364c2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741692899620
+status: 3
+tags: []
+user_id: varsh

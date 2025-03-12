@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/86f8eccb0569465e9e981e3befc83b5f/artifacts
+end_time: 1741682393335
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 86f8eccb0569465e9e981e3befc83b5f
+run_name: bright-lamb-274
+run_uuid: 86f8eccb0569465e9e981e3befc83b5f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741682392895
+status: 4
+tags: []
+user_id: varsh

@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/2ca7219d088d40cba30df201e5691e65/artifacts
+end_time: 1741696938601
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2ca7219d088d40cba30df201e5691e65
+run_name: peaceful-mink-146
+run_uuid: 2ca7219d088d40cba30df201e5691e65
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741696597262
+status: 3
+tags: []
+user_id: varsh

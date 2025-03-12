@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/4900b76bf89f4ed9a10925af4bc8c243/artifacts
+end_time: 1741694596208
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4900b76bf89f4ed9a10925af4bc8c243
+run_name: clumsy-trout-839
+run_uuid: 4900b76bf89f4ed9a10925af4bc8c243
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741694266336
+status: 3
+tags: []
+user_id: varsh

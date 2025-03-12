@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/a6c6ab61552e44e48390a14bd750da28/artifacts
+end_time: 1741765878765
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a6c6ab61552e44e48390a14bd750da28
+run_name: painted-crab-518
+run_uuid: a6c6ab61552e44e48390a14bd750da28
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741765489107
+status: 3
+tags: []
+user_id: varsh

@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/1c796366d99842a18e69026ea72847f8/artifacts
+end_time: 1741610350932
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 1c796366d99842a18e69026ea72847f8
+run_name: big-skink-246
+run_uuid: 1c796366d99842a18e69026ea72847f8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741609714587
+status: 3
+tags: []
+user_id: varsh

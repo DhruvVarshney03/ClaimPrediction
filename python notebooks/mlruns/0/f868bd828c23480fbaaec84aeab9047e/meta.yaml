@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/f868bd828c23480fbaaec84aeab9047e/artifacts
+end_time: 1741779079506
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f868bd828c23480fbaaec84aeab9047e
+run_name: unruly-worm-219
+run_uuid: f868bd828c23480fbaaec84aeab9047e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741777890095
+status: 3
+tags: []
+user_id: varsh

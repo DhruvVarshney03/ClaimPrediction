@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/b4b2c4d28e1b4518b44878bd2e91f1e4/artifacts
+end_time: 1741766828105
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b4b2c4d28e1b4518b44878bd2e91f1e4
+run_name: blushing-owl-367
+run_uuid: b4b2c4d28e1b4518b44878bd2e91f1e4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741766590783
+status: 3
+tags: []
+user_id: varsh

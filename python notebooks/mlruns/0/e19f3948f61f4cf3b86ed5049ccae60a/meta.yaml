@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/e19f3948f61f4cf3b86ed5049ccae60a/artifacts
+end_time: 1741764967740
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: e19f3948f61f4cf3b86ed5049ccae60a
+run_name: capable-rook-66
+run_uuid: e19f3948f61f4cf3b86ed5049ccae60a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741764591596
+status: 3
+tags: []
+user_id: varsh

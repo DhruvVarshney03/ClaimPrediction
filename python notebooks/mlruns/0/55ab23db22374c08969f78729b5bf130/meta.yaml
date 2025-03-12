@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/55ab23db22374c08969f78729b5bf130/artifacts
+end_time: 1741773162174
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 55ab23db22374c08969f78729b5bf130
+run_name: rare-bat-951
+run_uuid: 55ab23db22374c08969f78729b5bf130
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741773018323
+status: 3
+tags: []
+user_id: varsh
