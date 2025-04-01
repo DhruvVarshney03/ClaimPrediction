@@ -1,0 +1,16 @@
+artifact_uri: file:C:/Users/varsh/OneDrive/Desktop/notebook/Fast_Furious_Insured/python
+  notebooks/mlruns/0/7c5f445690314b8a9b023f16b4f8140d/artifacts
+end_time: 1741847861272
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7c5f445690314b8a9b023f16b4f8140d
+run_name: trusting-goat-495
+run_uuid: 7c5f445690314b8a9b023f16b4f8140d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741847643978
+status: 3
+tags: []
+user_id: varsh

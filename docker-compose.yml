@@ -8,8 +8,9 @@ services:
       - "8000:8000"
     restart: always
     volumes:
-      - ./api/processed_data:/app/processed_data  # Persist .pkl files
-      - ./api/logs:/app/logs  # Persist logs
+      - ./api/processed_data:/app/processed_data
+      - ./api/logs:/app/logs
+      - ./api/scalers:/app/api/scalers
 
 
   airflow-init:
